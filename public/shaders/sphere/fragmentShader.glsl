@@ -16,11 +16,11 @@ uniform sampler2D uDiffuseTex;
 
 void main() {
 
-    vec3 colorA = vec3(0.1,0.1,0.1);
-    vec3 colorB = vec3(0.7,0.7,0.7);
-    float pct = abs(sin(uAverageFrequency));
-    vec3 amb = mix(vec3(colorA, colorB, pct));
-    vec3 diff = amb;
+    // vec3 colorA = vec3(0.1,0.1,0.1);
+    // vec3 colorB = vec3(0.7,0.7,0.7);
+    // float pct = abs(sin(uAverageFrequency));
+    // vec3 amb = mix(vec3(colorA, colorB, pct));
+    // vec3 diff = amb;
 
     // vec3    ambient = uLightAmbient * vec3(texture2D(uDiffuseTex, vUv));
     vec3    ambient = uLightAmbient * uMaterialAmbient;
