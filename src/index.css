@@ -1,0 +1,13 @@
+html , body {
+    margin: 0;
+    padding: 0;
+    background:#101010;
+    min-height: 100vh;
+}
+
+canvas {
+    height: calc(100vh - 200px);
+    margin-top: 100px;
+    /* background: linear-gradient( 174.6deg,  #fcc8bf 11.8%, rgba(254,159,160,1) 89.9% ); */
+    background: #fafafa;
+}
