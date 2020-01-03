@@ -74,49 +74,6 @@ float snoise(vec3 v) {
                                 dot(p2,x2), dot(p3,x3) ) );
 }
 
-// varying vec3 vNormal;
-// varying vec3 vPos;
-
-// attribute vec3 tangent;
-
-// uniform vec3 uNoiseOffset;
-// uniform float uNoiseScale;
-// uniform float uNoiseFrequency;
-// uniform float uTime;
-
-// void main() {
-
-//   vec3 v0 = position;
-//   vec3 bitangent = cross(normal, tangent);
-//   vec3 v1 = v0 + (tangent * 0.01);
-//   vec3 v2 = v0 + (bitangent * 0.01);
-
-//   float disturbedNoisedScale0 = abs(sin(uTime)) * uNoiseScale;
-//   float noiseFrequency0 = abs(cos(uTime)) * uNoiseFrequency;
-//   vec3 off0 = vec3(v0.x + uNoiseOffset.x, v0.y + uNoiseOffset.y, v0.z + uNoiseOffset.z);
-//   float ns0 =  disturbedNoisedScale0 * snoise( off0 * noiseFrequency0);
-//   v0 += ((ns0 - 1.)/2.) * normal;
-
-//   float disturbedNoisedScale1 = abs(cos(uTime)) * uNoiseScale;
-//   float noiseFrequency1 = abs(sin(uTime)) * uNoiseFrequency;
-//   vec3 off1 = vec3(v1.x + uNoiseOffset.x, v1.y + uNoiseOffset.y, v1.z + uNoiseOffset.z);
-//   float ns1 = disturbedNoisedScale1 * snoise(off1 * noiseFrequency1);
-//   v1 += ((ns1 - 1.)/2.) * normal;
-
-//   float disturbedNoisedScale2 = abs(sin(-uTime)) * uNoiseScale;
-//   float noiseFrequency2 = abs(cos(uTime)) * uNoiseFrequency;  
-//   vec3 off2 = vec3(v2.x + uNoiseOffset.x, v2.y + uNoiseOffset.y, v2.z + uNoiseOffset.z);
-//   float ns2 =  disturbedNoisedScale2 * snoise( off2 * noiseFrequency2);
-//   v2 += ((ns2 - 1.)/2.) * normal;
-
-//   vec3 vn = cross(v2 - v0, v1 - v0);
-//   vNormal = normalize(-vn);
-
-//   vec4 modelViewPosition = modelViewMatrix * vec4( v0 , 1.0);
-//   vPos = vec3(modelMatrix * vec4(v0, 1.0));
-//   gl_Position = projectionMatrix * modelViewPosition;
-// }
-
 varying vec3 vNormal;
 varying vec3 vPos;
 
@@ -127,6 +84,7 @@ uniform float uNoiseScale;
 uniform float uNoiseFrequency;
 uniform float uAverageFrequency;
 uniform float uTime;
+
 
 void main() {
 
@@ -144,7 +102,7 @@ void main() {
   float ns2 =  uNoiseScale * 0.2 * abs(cos(uTime)) * snoise(vec3(v2.x + uNoiseOffset.x, v2.y + uNoiseOffset.y, v2.z + uNoiseOffset.z) * uNoiseFrequency * .2 * abs(sin(uTime)));
   v2+= ((ns2 - 1.)/2.) * normal;
 
-  vec3 vn = cross(v2 - v0, v1 - v0);
+  vec3 vn = cross(v2- v0, v1 - v0);
   vNormal = normalize(-vn);
 
   vec4 modelViewPosition = modelViewMatrix * vec4( v0 , 1.0);

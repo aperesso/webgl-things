@@ -46,14 +46,18 @@ const App = function() {
 
     const directionalLight = new THREE.DirectionalLight(diffuse, diffuseIntensity)
     directionalLight.position.copy(position);
-    directionalLight.castShadow = true;
+
 
     directionalLight.shadow.mapSize.width = 2048;  
     directionalLight.shadow.mapSize.height = 2048; 
     directionalLight.shadow.camera.left = -10;
     directionalLight.shadow.camera.right = 10;
     directionalLight.shadow.camera.top = -10;
-    directionalLight.shadow.camera.bottom = 10;
+    directionalLight.shadow.camera.bottom = 10; 
+
+
+    directionalLight.castShadow = true;
+
 
     this.scene.add(directionalLight);
   }
@@ -62,7 +66,6 @@ const App = function() {
     this.sphere = new Sphere();
     await this.sphere.setMesh();
     this.scene.add(this.sphere.mesh);
-
     this.background = new Background();
     this.scene.add(this.background.mesh);
   }

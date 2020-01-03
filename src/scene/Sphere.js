@@ -44,17 +44,20 @@ Sphere.prototype.setMesh = async function() {
   const depthShader = await loadFile(`${process.env.PUBLIC_URL}/shaders/sphere/depthShader.glsl`)
 
   this.mesh = new THREE.Mesh(geometry, sphereMaterial);
-  this.mesh.customDepthMaterial = new THREE.ShaderMaterial({
-    uniforms,   
-    vertexShader: depthShader,
-    fragmentShader: THREE.ShaderLib.shadow.fragmentShader,
-  });
+  // this.mesh.customDepthMaterial = new THREE.ShaderMaterial({
+  //   uniforms,   
+  //   vertexShader: depthShader,
+  //   fragmentShader: THREE.ShaderLib.shadow.fragmentShader,
+  // });
+
   this.mesh.castShadow = true;
 }
 
 Sphere.prototype.animate = function() {
+  // console.log(this.mesh)
   if (this.mesh === null) return;
   this.mesh.material.uniforms["uTime"].value += 0.01;
+  // this.mesh.customDepthMaterial.uniforms["uTime"].value += 0.01;
 }
 
 export default Sphere;

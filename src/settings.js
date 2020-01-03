@@ -24,7 +24,7 @@ const SPHERE_SETTINGS = {
   noiseOffset : new THREE.Vector3(0.2, 0.2, 0.2),
   material : {
     ambient : [196/255,0/255, 0/255],
-    specular : [.7,.7,.7],
+    specular : [.3,.3,.3],
     diffuse : [196/255,0/255, 0/255],
     shininess : 16,
   }

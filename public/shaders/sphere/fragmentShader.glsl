@@ -16,6 +16,7 @@ const float shininess = 64.0;
 const float screenGamma = 2.2; // Assume the monitor is calibrated to the sRGB color space
 const float lightPower = 8000.;
 
+
 void main() {
 
     // vec3    ambient = uLightAmbient * vec3(texture2D(uDiffuseTex, vUv));

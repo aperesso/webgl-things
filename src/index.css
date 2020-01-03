@@ -15,3 +15,7 @@ html , body {
     /* background: linear-gradient( 174.6deg,  #fcc8bf 11.8%, #fe9fa0 89.9% ); */
     /* background: #fafafa; */
 }
+
+#canvas:focus {
+    outline: none;
+}
