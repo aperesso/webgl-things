@@ -10,6 +10,7 @@ import './index.css';
 
 const App = function() {
 
+  this.isLoading = true;
 
   this.setup = async function() {
     const { width , height } = this.getDimensions();
@@ -34,7 +35,7 @@ const App = function() {
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
   }
 
   this.lightUpScene = function() {
@@ -66,8 +67,11 @@ const App = function() {
     this.sphere = new Sphere();
     await this.sphere.setMesh();
     this.scene.add(this.sphere.mesh);
+
+    
     this.background = new Background();
     this.scene.add(this.background.mesh);
+    this.isLoading = false;
   }
 
   this.getDimensions = function() {
@@ -78,6 +82,7 @@ const App = function() {
 
   this.loop = function() {
     this.renderer.setAnimationLoop(() => {
+        if (this.isLoading) return ;
         this.sphere.animate();
         this.renderer.render(this.scene, this.camera)
       }
