@@ -1,11 +1,19 @@
 import * as THREE from 'three';
 
+const replaceThreeChunkFn = (a, b) => {
+    return THREE.ShaderChunk[b] + '\n';
+}
+
+const shaderParse = glsl => {
+    return glsl.replace(/\/\/\s?chunk\(\s?(\w+)\s?\);/g, replaceThreeChunkFn);
+}
+
 const loadFile = path => {
 
     const file = new Promise((resolve, reject) => {
         fetch(path)
             .then(res => res.text())
-            .then(data => resolve(data))
+            .then(data => resolve(shaderParse(data)))
     })
 
     return file;

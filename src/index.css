@@ -9,7 +9,9 @@ html , body {
 
 #canvas {
     height: calc(100vh - 200px);
+    width: 100%;
     margin-top: 100px;
-    background: linear-gradient( 174.6deg,  #fcc8bf 11.8%, #fe9fa0 89.9% );
+    background: #151327;
+    /* background: linear-gradient( 174.6deg,  #fcc8bf 11.8%, #fe9fa0 89.9% ); */
     /* background: #fafafa; */
 }

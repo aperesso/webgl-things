@@ -117,15 +117,12 @@ float snoise(vec3 v) {
 //   gl_Position = projectionMatrix * modelViewPosition;
 // }
 
-varying vec3 vNormal;
-varying vec3 vPos;
-
+varying vec4 vDirectionalShadowCoord;
 attribute vec3 tangent;
 
 uniform vec3 uNoiseOffset;
 uniform float uNoiseScale;
 uniform float uNoiseFrequency;
-uniform float uAverageFrequency;
 uniform float uTime;
 
 void main() {
@@ -145,9 +142,7 @@ void main() {
   v2+= ((ns2 - 1.)/2.) * normal;
 
   vec3 vn = cross(v2 - v0, v1 - v0);
-  vNormal = normalize(-vn);
 
   vec4 modelViewPosition = modelViewMatrix * vec4( v0 , 1.0);
-  vPos = vec3(modelMatrix * vec4(v0, 1.0));
   gl_Position = projectionMatrix * modelViewPosition;
 }
