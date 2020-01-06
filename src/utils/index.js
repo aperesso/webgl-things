@@ -19,6 +19,28 @@ const loadFile = path => {
     return file;
 }
 
+const loadSkyBox = (path, format = 'png') => {
+
+    const urls = [
+        `${process.env.PUBLIC_URL}/assets/skybox/${path}/right.${format}`,
+        `${process.env.PUBLIC_URL}/assets/skybox/${path}/left.${format}`,
+        `${process.env.PUBLIC_URL}/assets/skybox/${path}/top.${format}`,
+        `${process.env.PUBLIC_URL}/assets/skybox/${path}/bottom.${format}`,
+        `${process.env.PUBLIC_URL}/assets/skybox/${path}/back.${format}`,
+        `${process.env.PUBLIC_URL}/assets/skybox/${path}/front.${format}`,
+    ]
+
+    const loader = new THREE.CubeTextureLoader();
+
+    const skyBox = new Promise((resolve, reject) => {
+        loader.load(urls, texture => {
+            resolve (texture)
+        })
+    });
+
+    return skyBox;
+}
+
 const loadShaders = async shaderName => {
 
     const shaders = await Promise.all(['fragmentShader', 'vertexShader']
@@ -53,6 +75,12 @@ const loadFont = file => {
     return font;
 }
 
+const getDimensions = function() {
+    const canvas = document.getElementById("canvas");
+    const { width , height } = canvas.getBoundingClientRect();
+    return {width, height}
+  }
+
 const colorToShader = color => {
     return new THREE.Vector3(...color.map(color => color / 255.0))
 }
@@ -75,5 +103,7 @@ export {
     loadFont,
     colorToShader,
     loadTexture,
-    loadAudio
+    loadAudio,
+    loadSkyBox,
+    getDimensions,
 }

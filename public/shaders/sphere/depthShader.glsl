@@ -91,13 +91,13 @@ void main() {
   vec3 v1 = v0 + (tangent * 0.01);
   vec3 v2 = v0 + (bitangent * 0.01);
 
-  float ns0 =  uNoiseScale  * 0.2 * abs(cos(uTime)) * snoise(vec3(v0.x + uNoiseOffset.x, v0.y + uNoiseOffset.y, v0.z + uNoiseOffset.z) * uNoiseFrequency * .2 * abs(sin(uTime)));
+  float ns0 =  uNoiseScale  *  snoise(vec3(v0.x + uNoiseOffset.x, v0.y + uNoiseOffset.y, v0.z + uNoiseOffset.z) * uNoiseFrequency );
   v0 += ((ns0 - 1.)/2.) * normal;
 
-  float ns1 = uNoiseScale * 0.2 * abs(cos(uTime)) * snoise(vec3(v1.x + uNoiseOffset.x, v1.y + uNoiseOffset.y, v1.z + uNoiseOffset.z) * uNoiseFrequency * .2 * abs(sin(uTime)));
+  float ns1 = uNoiseScale *  snoise(vec3(v1.x + uNoiseOffset.x, v1.y + uNoiseOffset.y, v1.z + uNoiseOffset.z) * uNoiseFrequency );
   v1 += ((ns1 - 1.)/2.) * normal;
 
-  float ns2 =  uNoiseScale * 0.2 * abs(cos(uTime)) * snoise(vec3(v2.x + uNoiseOffset.x, v2.y + uNoiseOffset.y, v2.z + uNoiseOffset.z) * uNoiseFrequency * .2 * abs(sin(uTime)));
+  float ns2 =  uNoiseScale *  snoise(vec3(v2.x + uNoiseOffset.x, v2.y + uNoiseOffset.y, v2.z + uNoiseOffset.z) * uNoiseFrequency );
   v2+= ((ns2 - 1.)/2.) * normal;
 
   vec3 vn = cross(v2- v0, v1 - v0);

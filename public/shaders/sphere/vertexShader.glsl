@@ -85,6 +85,9 @@ uniform float uNoiseFrequency;
 uniform float uAverageFrequency;
 uniform float uTime;
 
+uniform float uAudioBandsBuffer[8];
+
+varying float average;
 
 void main() {
 
@@ -93,13 +96,19 @@ void main() {
   vec3 v1 = v0 + (tangent * 0.01);
   vec3 v2 = v0 + (bitangent * 0.01);
 
-  float ns0 =  uNoiseScale  * 0.2 * abs(cos(uTime)) * snoise(vec3(v0.x + uNoiseOffset.x, v0.y + uNoiseOffset.y, v0.z + uNoiseOffset.z) * uNoiseFrequency * .2 * abs(sin(uTime)));
+  float noiseSc = uNoiseScale + 2.0 * (uAudioBandsBuffer[6] + uAudioBandsBuffer[7]) / 2.;
+  float noiseFreq = uNoiseFrequency + 0.05 * (uAudioBandsBuffer[1] + uAudioBandsBuffer[0]) / 2. ;
+
+  average = (uAudioBandsBuffer[0] + uAudioBandsBuffer[1] + uAudioBandsBuffer[2] + uAudioBandsBuffer[3] +
+    uAudioBandsBuffer[4] + uAudioBandsBuffer[5] + uAudioBandsBuffer[6] + uAudioBandsBuffer[7]) / 8.0;
+
+  float ns0 =  noiseSc *  snoise(vec3(v0.x + uNoiseOffset.x, v0.y + uNoiseOffset.y, v0.z + uNoiseOffset.z) * noiseFreq );
   v0 += ((ns0 - 1.)/2.) * normal;
 
-  float ns1 = uNoiseScale * 0.2 * abs(cos(uTime)) * snoise(vec3(v1.x + uNoiseOffset.x, v1.y + uNoiseOffset.y, v1.z + uNoiseOffset.z) * uNoiseFrequency * .2 * abs(sin(uTime)));
+  float ns1 = noiseSc *  snoise(vec3(v1.x + uNoiseOffset.x, v1.y + uNoiseOffset.y, v1.z + uNoiseOffset.z) * noiseFreq );
   v1 += ((ns1 - 1.)/2.) * normal;
 
-  float ns2 =  uNoiseScale * 0.2 * abs(cos(uTime)) * snoise(vec3(v2.x + uNoiseOffset.x, v2.y + uNoiseOffset.y, v2.z + uNoiseOffset.z) * uNoiseFrequency * .2 * abs(sin(uTime)));
+  float ns2 =  noiseSc * snoise(vec3(v2.x + uNoiseOffset.x, v2.y + uNoiseOffset.y, v2.z + uNoiseOffset.z) * noiseFreq );
   v2+= ((ns2 - 1.)/2.) * normal;
 
   vec3 vn = cross(v2- v0, v1 - v0);
@@ -107,5 +116,6 @@ void main() {
 
   vec4 modelViewPosition = modelViewMatrix * vec4( v0 , 1.0);
   vPos = vec3(modelMatrix * vec4(v0, 1.0));
+ 
   gl_Position = projectionMatrix * modelViewPosition;
 }

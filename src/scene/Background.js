@@ -13,8 +13,6 @@ const Background = function() {
 
   this.mesh = new THREE.Mesh(geometry, material);
   this.mesh.position.z = -100;
-  this.mesh.rotation.x -= Math.PI / 2;
-  this.mesh.position.y = -35;
   this.mesh.receiveShadow = true;
 
 }

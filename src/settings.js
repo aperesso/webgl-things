@@ -16,25 +16,78 @@ const LIGHT_SETTINGS = {
 }
 
 const SPHERE_SETTINGS = {
-  radius : 10,
-  segments : 100,
-  color : 0xfafafa,
-  noiseScale : 10.5,
-  noiseFrequency : 1.6,
+  radius : 8,
+  segments : 500,
+  noiseScale : 0.7,
+  noiseFrequency : 0.47,
   noiseOffset : new THREE.Vector3(0.2, 0.2, 0.2),
+  materialAmbient : "#070707",
+  materialSpecular : "#593232",
+  materialDiffuse : "#9d9d9d",
+  materialShininess : 64, 
+  
+}
+
+const GUI_SPHERE_SETTINGS = {
+  noise : {
+    noiseScale : {
+      type : 'range',
+      range : [0, 20]
+    },
+    noiseFrequency : {
+      type : 'range',
+      range : [0, 1],
+    },
+  },
   material : {
-    ambient : [196/255,0/255, 0/255],
-    specular : [.3,.3,.3],
-    diffuse : [196/255,0/255, 0/255],
-    shininess : 16,
-  }
+    materialShininess : {
+      type : 'range',
+      range : [16, 64]
+    },
+    materialAmbient : {
+      type : 'color'
+    },
+    materialDiffuse : {
+      type : 'color'
+    },
+    materialSpecular : {
+      type : 'color'
+    }
+  },
+  
 }
 
 const BACKGROUND_SETTINGS = {
-  color :  0x0e0c24,
+  color :  0x101010,
   height : 1000,
   width : 1000,
   segments : 1
+}
+
+const BLOOM_SETTINGS = {
+  exposure: 1,
+  bloomStrength: 0.5,
+  bloomThreshold: 0.3,
+  bloomRadius: 0.1
+}
+
+const GUI_BLOOM_SETTINGS = {
+  exposure : { 
+    type : 'range',
+    range : [0.1, 2],
+  },
+  bloomStrength : {
+    type : 'range',
+    range : [0, .5],
+  }, 
+  bloomThreshold : {
+    type : 'range',
+    range : [0, .5],
+  },
+  bloomRadius : {
+    type : 'range',
+    range : [0, .5],
+  }
 }
 
 export {
@@ -42,4 +95,7 @@ export {
   SPHERE_SETTINGS,
   BACKGROUND_SETTINGS,
   LIGHT_SETTINGS,
+  GUI_SPHERE_SETTINGS,
+  BLOOM_SETTINGS,
+  GUI_BLOOM_SETTINGS,
 }
